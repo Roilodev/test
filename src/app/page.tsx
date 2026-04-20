@@ -14,7 +14,7 @@ export default async function Home() {
 
   const categories = await prisma.product.groupBy({
     by: ["category"],
-    _count: { category: true },
+    _count: { category: true }, //comentario
   });
 
   return (
