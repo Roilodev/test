@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCartButton from "@/components/products/AddToCartButton";
-import ShareButtons from "@/components/products/ShareButtons";
 
 export default async function ProductDetailPage({
   params,
@@ -25,7 +24,7 @@ export default async function ProductDetailPage({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-amber-700">Inicio</Link>
+        <Link href="/" className="hover:text-amber-700">Início</Link>
         <span>/</span>
         <Link href="/products" className="hover:text-amber-700">Catálogo</Link>
         <span>/</span>
@@ -66,32 +65,26 @@ export default async function ProductDetailPage({
               {product.stock > 0 ? (
                 <p className="text-green-600 text-sm font-medium flex items-center gap-1">
                   <span className="w-2 h-2 bg-green-500 rounded-full inline-block" />
-                  En stock ({product.stock} disponibles)
+                  Em estoque ({product.stock} disponíveis)
                 </p>
               ) : (
-                <p className="text-red-500 text-sm font-medium">Sin stock</p>
+                <p className="text-red-500 text-sm font-medium">Sem estoque</p>
               )}
 
               <AddToCartButton product={product} />
-              <ShareButtons
-                name={product.name}
-                price={product.price}
-                imageUrl={product.imageUrl}
-                slug={product.slug}
-              />
 
               <div className="grid grid-cols-3 gap-2 pt-4 border-t text-center text-xs text-gray-500">
                 <div>
                   <p className="text-base mb-0.5">🚚</p>
-                  <p>Envío gratis +$500</p>
+                  <p>Frete grátis +$500</p>
                 </div>
                 <div>
                   <p className="text-base mb-0.5">🛡️</p>
-                  <p>Garantía 2 años</p>
+                  <p>Garantia 2 anos</p>
                 </div>
                 <div>
                   <p className="text-base mb-0.5">↩️</p>
-                  <p>30 días devolución</p>
+                  <p>30 dias devolução</p>
                 </div>
               </div>
             </div>
@@ -102,7 +95,7 @@ export default async function ProductDetailPage({
       {/* Related */}
       {related.length > 0 && (
         <section className="mt-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-5">Productos relacionados</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-5">Produtos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {related.map((p) => (
               <Link key={p.id} href={`/products/${p.slug}`}

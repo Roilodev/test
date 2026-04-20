@@ -17,7 +17,7 @@ type ProductData = {
   featured: boolean;
 };
 
-const CATEGORIES = ["Sofás", "Camas", "Mesas", "Sillas", "Almacenamiento", "Escritorios", "Iluminación"];
+const CATEGORIES = ["Sofás", "Camas", "Mesas", "Cadeiras", "Armazenamento", "Escrivaninhas", "Iluminação"];
 
 function toSlug(str: string) {
   return str
@@ -71,14 +71,14 @@ export default function ProductForm({ product }: { product?: ProductData }) {
 
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || "Error al guardar");
+        setError(data.error || "Erro ao salvar");
         return;
       }
 
       router.push("/admin");
       router.refresh();
     } catch {
-      setError("Error de conexión");
+      setError("Erro de conexão");
     } finally {
       setLoading(false);
     }
@@ -89,7 +89,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
     <form onSubmit={handleSubmit} className="space-y-5 max-w-2xl">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Nome *</label>
           <input
             value={form.name}
             onChange={(e) => set("name", e.target.value)}
@@ -109,7 +109,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Descripción *</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Descrição *</label>
         <textarea
           value={form.description}
           onChange={(e) => set("description", e.target.value)}
@@ -121,7 +121,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
 
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Precio ($) *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Preço ($) *</label>
           <input
             type="number"
             min="0"
@@ -133,7 +133,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Stock *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Estoque *</label>
           <input
             type="number"
             min="0"
@@ -144,7 +144,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Categoría *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Categoria *</label>
           <select
             value={form.category}
             onChange={(e) => set("category", e.target.value)}
@@ -158,7 +158,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">URL de imagen *</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">URL da imagem *</label>
         <input
           value={form.imageUrl}
           onChange={(e) => set("imageUrl", e.target.value)}
@@ -182,7 +182,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
           className="w-4 h-4 text-amber-600 rounded focus:ring-amber-400"
         />
         <label htmlFor="featured" className="text-sm font-medium text-gray-700">
-          Producto destacado (aparece en la portada)
+          Produto em destaque (aparece na página inicial)
         </label>
       </div>
 
@@ -196,7 +196,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
           disabled={loading}
           className="bg-amber-700 hover:bg-amber-800 disabled:opacity-60 text-white font-bold px-6 py-2.5 rounded-lg transition-colors text-sm"
         >
-          {loading ? "Guardando..." : isEditing ? "Guardar cambios" : "Crear producto"}
+          {loading ? "Salvando..." : isEditing ? "Salvar alterações" : "Criar produto"}
         </button>
         <button
           type="button"
@@ -217,7 +217,7 @@ export default function ProductForm({ product }: { product?: ProductData }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
-            Publicar en redes
+            Publicar nas redes
           </button>
         )}
       </div>

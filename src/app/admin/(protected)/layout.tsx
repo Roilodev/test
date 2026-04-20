@@ -23,10 +23,13 @@ export default async function AdminLayout({
             Admin Panel
           </Link>
           <Link href="/admin" className="text-amber-200 hover:text-white text-sm transition-colors">
-            Productos
+            Produtos
+          </Link>
+          <Link href="/admin/visits" className="text-amber-200 hover:text-white text-sm transition-colors">
+            Visitas
           </Link>
           <Link href="/" className="text-amber-200 hover:text-white text-sm transition-colors" target="_blank">
-            Ver tienda ↗
+            Ver loja ↗
           </Link>
         </div>
         <div className="flex items-center gap-3">

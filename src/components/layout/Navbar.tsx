@@ -22,13 +22,13 @@ export default function Navbar() {
               <div className="w-8 h-8 bg-amber-700 rounded-sm flex items-center justify-center">
                 <span className="text-white font-bold text-sm">M</span>
               </div>
-              <span className="font-bold text-xl text-gray-900">Mueblería Moderna</span>
+              <span className="font-bold text-xl text-gray-900">Movelaria Moderna</span>
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-8">
               <Link href="/" className="text-gray-600 hover:text-amber-700 transition-colors font-medium">
-                Inicio
+                Início
               </Link>
               <Link href="/products" className="text-gray-600 hover:text-amber-700 transition-colors font-medium">
                 Catálogo
@@ -40,7 +40,7 @@ export default function Navbar() {
               <button
                 onClick={() => setCartOpen(true)}
                 className="relative p-2 text-gray-600 hover:text-amber-700 transition-colors"
-                aria-label="Abrir carrito"
+                aria-label="Abrir carrinho"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -58,7 +58,7 @@ export default function Navbar() {
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="md:hidden p-2 text-gray-600"
-                aria-label="Menú"
+                aria-label="Menu"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {menuOpen ? (
@@ -76,7 +76,7 @@ export default function Navbar() {
             <div className="md:hidden border-t border-gray-100 py-3 space-y-2">
               <Link href="/" onClick={() => setMenuOpen(false)}
                 className="block px-3 py-2 text-gray-600 hover:text-amber-700 font-medium">
-                Inicio
+                Início
               </Link>
               <Link href="/products" onClick={() => setMenuOpen(false)}
                 className="block px-3 py-2 text-gray-600 hover:text-amber-700 font-medium">

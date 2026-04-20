@@ -23,7 +23,7 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      setError("Credenciales incorrectas");
+      setError("Credenciais incorretas");
       setLoading(false);
     } else {
       router.push("/admin");
@@ -38,8 +38,8 @@ export default function LoginPage() {
           <div className="w-12 h-12 bg-amber-700 rounded-xl flex items-center justify-center mx-auto mb-3">
             <span className="text-white font-bold text-xl">M</span>
           </div>
-          <h1 className="text-xl font-bold text-gray-900">Panel de Administración</h1>
-          <p className="text-gray-500 text-sm mt-1">Mueblería Moderna</p>
+          <h1 className="text-xl font-bold text-gray-900">Painel de Administração</h1>
+          <p className="text-gray-500 text-sm mt-1">Movelaria Moderna</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,7 +54,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Senha</label>
             <input
               type="password"
               value={password}
@@ -73,7 +73,7 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-amber-700 hover:bg-amber-800 disabled:opacity-60 text-white font-bold py-2.5 rounded-lg transition-colors"
           >
-            {loading ? "Ingresando..." : "Ingresar"}
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
       </div>

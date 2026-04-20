@@ -28,7 +28,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
       disabled={product.stock === 0}
       className="w-full bg-amber-700 hover:bg-amber-800 disabled:bg-gray-300 text-white font-bold py-3 rounded-xl transition-colors text-sm"
     >
-      {product.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+      {product.stock === 0 ? "Sem estoque" : "Adicionar ao carrinho"}
     </button>
   );
 }

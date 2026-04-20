@@ -78,7 +78,7 @@ function toHashtag(text: string) {
 function generateCaption(product: ProductData, productUrl: string): string {
   const { name, description, price, category } = product;
   const catTag = toHashtag(category);
-  return `✨ ${name} — $${price.toFixed(2)}\n\n${description}\n\n📦 Categoría: ${category}\n🚚 Envío gratis en compras +$500\n🛡️ Garantía 2 años\n\n👉 ${productUrl}\n\n#muebles #hogar #decoracion #${catTag} #muebleriamoderna`;
+  return `✨ ${name} — $${price.toFixed(2)}\n\n${description}\n\n📦 Categoria: ${category}\n🚚 Frete grátis em compras acima de $500\n🛡️ Garantia 2 anos\n\n👉 ${productUrl}\n\n#moveis #lar #decoracao #${catTag} #movelariamoderna`;
 }
 
 type Props = {
@@ -114,12 +114,12 @@ export default function SocialPostModal({ product, onClose }: Props) {
 
   const handlePublish = async () => {
     if (selectedPlatforms.size === 0) {
-      setStatusMsg("Selecciona al menos una red social.");
+      setStatusMsg("Selecione ao menos uma rede social.");
       setStatus("error");
       return;
     }
     if (!product.imageUrl) {
-      setStatusMsg("El producto no tiene imagen configurada.");
+      setStatusMsg("O produto não tem imagem configurada.");
       setStatus("error");
       return;
     }
@@ -148,7 +148,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
         setStatus("error");
       } else {
         setStatus("success");
-        setStatusMsg("¡Publicación enviada con éxito!");
+        setStatusMsg("Publicação enviada com sucesso!");
       }
     } catch (err) {
       setStatusMsg(String(err));
@@ -168,7 +168,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">Publicar en redes sociales</h2>
+            <h2 className="text-lg font-bold text-gray-900">Publicar nas redes sociais</h2>
             <p className="text-sm text-gray-500 mt-0.5 truncate max-w-sm">{product.name}</p>
           </div>
           <button
@@ -185,7 +185,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
         <div className="p-5 space-y-5">
           {/* Platform checkboxes */}
           <div>
-            <p className="text-sm font-semibold text-gray-700 mb-2">Selecciona las redes donde publicar</p>
+            <p className="text-sm font-semibold text-gray-700 mb-2">Selecione as redes onde publicar</p>
             <div className="flex flex-wrap gap-2">
               {NETWORKS.map((n) => {
                 const checked = selectedPlatforms.has(n.id);
@@ -229,7 +229,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
           {/* Caption editor */}
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="text-sm font-semibold text-gray-700">Texto de la publicación</label>
+              <label className="text-sm font-semibold text-gray-700">Texto da publicação</label>
               <span className="text-xs text-gray-400 font-mono">{charCount} caracteres</span>
             </div>
             <textarea
@@ -252,7 +252,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
 
           {status === "error" && (
             <div className="text-red-700 bg-red-50 border border-red-200 px-4 py-3 rounded-xl text-sm">
-              <span className="font-semibold">Error: </span>{statusMsg}
+              <span className="font-semibold">Erro: </span>{statusMsg}
             </div>
           )}
 
@@ -284,7 +284,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                   </svg>
-                  Publicar ahora
+                  Publicar agora
                 </>
               )}
             </button>
@@ -307,13 +307,14 @@ export default function SocialPostModal({ product, onClose }: Props) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                   Copiar texto
+
                 </>
               )}
             </button>
           </div>
 
           <p className="text-xs text-gray-400 text-center">
-            La publicación se enviará a las cuentas conectadas en tu perfil de upload-post.com
+            A publicação será enviada para as contas conectadas no seu perfil de upload-post.com
           </p>
         </div>
       </div>

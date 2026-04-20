@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.stock === 0 && (
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
               <span className="bg-white text-gray-800 font-bold px-3 py-1 rounded-full text-sm">
-                Sin stock
+                Sem estoque
               </span>
             </div>
           )}
@@ -64,7 +64,7 @@ export default function ProductCard({ product }: { product: Product }) {
             disabled={product.stock === 0}
             className="bg-amber-700 hover:bg-amber-800 disabled:bg-gray-300 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
           >
-            {product.stock === 0 ? "Agotado" : "Agregar"}
+            {product.stock === 0 ? "Esgotado" : "Adicionar"}
           </button>
         </div>
       </div>

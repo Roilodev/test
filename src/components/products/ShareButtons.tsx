@@ -17,7 +17,7 @@ export default function ShareButtons({ name, price, imageUrl, slug }: Props) {
     ? `${window.location.origin}/products/${slug}`
     : `/products/${slug}`;
 
-  const text = `🛋️ ${name} — $${price.toFixed(2)} | Mueblería Moderna`;
+  const text = `🛋️ ${name} — $${price.toFixed(2)} | Movelaria Moderna`;
 
   const platforms = [
     {
@@ -94,7 +94,7 @@ export default function ShareButtons({ name, price, imageUrl, slug }: Props) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
             d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
         </svg>
-        Compartir producto
+        Compartilhar produto
       </button>
 
       {open && (
@@ -105,7 +105,7 @@ export default function ShareButtons({ name, price, imageUrl, slug }: Props) {
           {/* Dropdown */}
           <div className="absolute bottom-full mb-2 left-0 right-0 bg-white rounded-2xl shadow-xl border border-gray-100 p-4 z-20">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-              Compartir en
+              Compartilhar em
             </p>
             <div className="grid grid-cols-5 gap-2 mb-3">
               {platforms.map((p) => (
@@ -133,14 +133,14 @@ export default function ShareButtons({ name, price, imageUrl, slug }: Props) {
                     <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className="text-green-600 font-medium">¡Copiado!</span>
+                    <span className="text-green-600 font-medium">Copiado!</span>
                   </>
                 ) : (
                   <>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>
-                    Copiar enlace
+                    Copiar link
                   </>
                 )}
               </button>
@@ -153,7 +153,7 @@ export default function ShareButtons({ name, price, imageUrl, slug }: Props) {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
-                  Más opciones
+                  Mais opções
                 </button>
               )}
             </div>

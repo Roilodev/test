@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   const apiKey = process.env.UPLOAD_POST_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: "UPLOAD_POST_API_KEY no configurada" }, { status: 500 });
+    return NextResponse.json({ error: "UPLOAD_POST_API_KEY não configurada" }, { status: 500 });
   }
 
   let body: { imageUrl?: string; caption?: string; platforms?: string[] };
@@ -11,12 +11,13 @@ export async function POST(req: Request) {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Body inválido" }, { status: 400 });
+
   }
 
   const { imageUrl, caption, platforms } = body;
 
   if (!imageUrl || !caption || !platforms || platforms.length === 0) {
-    return NextResponse.json({ error: "imageUrl, caption y platforms son requeridos" }, { status: 400 });
+    return NextResponse.json({ error: "imageUrl, caption e platforms são obrigatórios" }, { status: 400 });
   }
 
   // Download the product image server-side
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
     imageBuffer = await imgRes.arrayBuffer();
     contentType = imgRes.headers.get("content-type") || "image/jpeg";
   } catch (err) {
-    return NextResponse.json({ error: `No se pudo descargar la imagen: ${String(err)}` }, { status: 400 });
+    return NextResponse.json({ error: `Não foi possível baixar a imagem: ${String(err)}` }, { status: 400 });
   }
 
   // Build multipart FormData

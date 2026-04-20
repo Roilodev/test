@@ -39,8 +39,8 @@ export default function ChatWidget() {
               <span className="text-amber-700 font-bold text-sm">M</span>
             </div>
             <div>
-              <p className="text-white font-semibold text-sm">Asistente Mueblería</p>
-              <p className="text-amber-200 text-xs">En línea</p>
+              <p className="text-white font-semibold text-sm">Assistente Movelaria</p>
+              <p className="text-amber-200 text-xs">Online</p>
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -57,8 +57,8 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <div className="text-center text-gray-500 text-sm mt-8">
                 <p className="text-2xl mb-2">👋</p>
-                <p className="font-medium">¡Hola! Soy tu asistente virtual.</p>
-                <p className="text-xs mt-1">¿En qué mueble puedo ayudarte hoy?</p>
+                <p className="font-medium">Olá! Sou seu assistente virtual.</p>
+                <p className="text-xs mt-1">Em que móvel posso te ajudar hoje?</p>
               </div>
             )}
             {messages.map((m) => {
@@ -103,7 +103,7 @@ export default function ChatWidget() {
             <input
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Escribe tu mensaje..."
+              placeholder="Digite sua mensagem..."
               className="flex-1 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
             />
             <button
@@ -123,7 +123,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen(!open)}
         className="w-14 h-14 bg-amber-700 hover:bg-amber-800 text-white rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110"
-        aria-label="Abrir chat"
+        aria-label="Abrir chat assistente"
       >
         {open ? (
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

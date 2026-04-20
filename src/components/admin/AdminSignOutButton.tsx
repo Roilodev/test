@@ -8,7 +8,7 @@ export default function AdminSignOutButton() {
       onClick={() => signOut({ callbackUrl: "/admin/login" })}
       className="text-amber-200 hover:text-white text-sm transition-colors"
     >
-      Salir
+      Sair
     </button>
   );
 }

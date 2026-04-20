@@ -26,7 +26,7 @@ export default async function ProductsPage({
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-amber-700">Inicio</Link>
+        <Link href="/" className="hover:text-amber-700">Início</Link>
         <span>/</span>
         <span className="text-gray-900">Catálogo</span>
         {category && (
@@ -41,7 +41,7 @@ export default async function ProductsPage({
         {/* Sidebar filters */}
         <aside className="md:w-56 flex-shrink-0">
           <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 sticky top-20">
-            <h3 className="font-bold text-gray-900 mb-3">Categorías</h3>
+            <h3 className="font-bold text-gray-900 mb-3">Categorias</h3>
             <ul className="space-y-1">
               <li>
                 <Link
@@ -52,7 +52,7 @@ export default async function ProductsPage({
                       : "text-gray-600 hover:bg-gray-50"
                   }`}
                 >
-                  Todos los productos
+                  Todos os produtos
                 </Link>
               </li>
               {categories.map(({ category: cat }) => (
@@ -77,15 +77,15 @@ export default async function ProductsPage({
         <div className="flex-1">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-xl font-bold text-gray-900">
-              {category || "Todos los productos"}
+              {category || "Todos os produtos"}
             </h1>
-            <span className="text-sm text-gray-500">{products.length} productos</span>
+            <span className="text-sm text-gray-500">{products.length} produtos</span>
           </div>
 
           {products.length === 0 ? (
             <div className="text-center py-16 text-gray-400">
               <p className="text-4xl mb-3">🛋️</p>
-              <p className="font-medium">No hay productos en esta categoría</p>
+              <p className="font-medium">Nenhum produto nesta categoria</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
