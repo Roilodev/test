@@ -4,8 +4,24 @@ import Link from "next/link";
 import Image from "next/image";
 import DeleteProductButton from "@/components/admin/DeleteProductButton";
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
+  const search = q?.trim() ?? "";
+
   const products = await prisma.product.findMany({
+    where: search
+      ? {
+          OR: [
+            { name: { contains: search } },
+            { category: { contains: search } },
+            { slug: { contains: search } },
+          ],
+        }
+      : undefined,
     orderBy: { createdAt: "desc" },
   });
 
@@ -26,6 +42,26 @@ export default async function AdminDashboard() {
           <span>+</span> Novo produto
         </Link>
       </div>
+
+      {/* Search */}
+      <form method="GET" className="mb-6">
+        <div className="relative max-w-sm">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+          </svg>
+          <input
+            name="q"
+            defaultValue={search}
+            placeholder="Buscar por nome, categoria ou slug..."
+            className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-400"
+          />
+          {search && (
+            <a href="/admin" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs font-medium">
+              ✕
+            </a>
+          )}
+        </div>
+      </form>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
@@ -60,7 +96,10 @@ export default async function AdminDashboard() {
               {products.length === 0 && (
                 <tr>
                   <td colSpan={7} className="text-center py-12 text-gray-400">
-                    Nenhum produto cadastrado. <Link href="/admin/products/new" className="text-amber-700 font-medium">Criar o primeiro</Link>
+                    {search
+                      ? <>Nenhum produto encontrado para "<span className="font-medium text-gray-600">{search}</span>". <a href="/admin" className="text-amber-700 font-medium">Limpar busca</a></>
+                      : <>Nenhum produto cadastrado. <Link href="/admin/products/new" className="text-amber-700 font-medium">Criar o primeiro</Link></>
+                    }
                   </td>
                 </tr>
               )}
