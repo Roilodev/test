@@ -9,6 +9,8 @@ type ProductData = {
   price: number;
   category: string;
   imageUrl: string;
+  images?: string[];
+  videos?: string[];
   slug: string;
 };
 
@@ -90,12 +92,15 @@ type PublishStatus = "idle" | "loading" | "success" | "error";
 
 export default function SocialPostModal({ product, onClose }: Props) {
   const productUrl = `${typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"}/products/${product.slug}`;
+  const allImages = product.images && product.images.length > 0 ? product.images : (product.imageUrl ? [product.imageUrl] : []);
+  const allVideos = product.videos ?? [];
 
   const [caption, setCaption] = useState(() => generateCaption(product, productUrl));
   const [selectedPlatforms, setSelectedPlatforms] = useState<Set<Network>>(new Set());
   const [status, setStatus] = useState<PublishStatus>("idle");
   const [statusMsg, setStatusMsg] = useState("");
   const [copied, setCopied] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const togglePlatform = (id: Network) => {
     setSelectedPlatforms((prev) => {
@@ -118,7 +123,7 @@ export default function SocialPostModal({ product, onClose }: Props) {
       setStatus("error");
       return;
     }
-    if (!product.imageUrl) {
+    if (allImages.length === 0) {
       setStatusMsg("O produto não tem imagem configurada.");
       setStatus("error");
       return;
@@ -132,7 +137,8 @@ export default function SocialPostModal({ product, onClose }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          imageUrl: product.imageUrl,
+          imageUrls: allImages,
+          videoUrls: allVideos,
           caption,
           platforms: Array.from(selectedPlatforms),
         }),
@@ -213,15 +219,59 @@ export default function SocialPostModal({ product, onClose }: Props) {
             </div>
           </div>
 
-          {/* Image preview */}
-          {product.imageUrl && (
-            <div className="flex items-start gap-4 bg-gray-50 rounded-xl border border-gray-200 p-4">
-              <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
-                <Image src={product.imageUrl} alt={product.name} fill className="object-cover" unoptimized />
+          {/* Image carousel preview */}
+          {allImages.length > 0 && (
+            <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
+              <div className="flex gap-3">
+                <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
+                  <Image src={allImages[carouselIndex]} alt={product.name} fill className="object-cover" unoptimized />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-gray-800 text-sm mb-1">{product.name}</p>
+                  <p className="text-gray-500 text-sm">${product.price.toFixed(2)} · {product.category}</p>
+                  {allImages.length > 1 && (
+                    <p className="text-xs text-purple-600 font-medium mt-1.5">
+                      📸 {allImages.length} fotos · publicará como carrusel
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className="text-sm text-gray-600">
-                <p className="font-semibold text-gray-800 mb-1">{product.name}</p>
-                <p className="text-gray-500">${product.price.toFixed(2)} · {product.category}</p>
+              {allImages.length > 1 && (
+                <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
+                  {allImages.map((url, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setCarouselIndex(i)}
+                      className={`relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
+                        i === carouselIndex ? "border-purple-500" : "border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <Image src={url} alt={`foto ${i + 1}`} fill className="object-cover" unoptimized />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Video preview */}
+          {allVideos.length > 0 && (
+            <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
+              <p className="text-xs font-semibold text-gray-600 mb-2">
+                🎬 {allVideos.length} vídeo{allVideos.length !== 1 ? "s" : ""} · será incluído na publicação
+              </p>
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {allVideos.map((url, i) => (
+                  <div key={i} className="relative w-24 h-16 rounded-lg overflow-hidden bg-black flex-shrink-0">
+                    <video src={url} className="w-full h-full object-cover opacity-80" muted preload="metadata" />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <svg className="w-6 h-6 text-white drop-shadow" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import AddToCartButton from "@/components/products/AddToCartButton";
+import ProductGallery from "@/components/products/ProductGallery";
 
 export default async function ProductDetailPage({
   params,
@@ -36,15 +37,11 @@ export default async function ProductDetailPage({
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="grid md:grid-cols-2 gap-0">
-          {/* Image */}
-          <div className="relative h-72 md:h-auto min-h-72 bg-gray-100">
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              fill
-              className="object-cover"
-              unoptimized
-              priority
+          {/* Gallery */}
+          <div className="h-72 md:h-auto min-h-72">
+            <ProductGallery
+              images={(() => { try { const a = JSON.parse(product.images); return Array.isArray(a) && a.length > 0 ? a : [product.imageUrl]; } catch { return [product.imageUrl]; } })()}
+              videos={(() => { try { const a = JSON.parse(product.videos); return Array.isArray(a) ? a : []; } catch { return []; } })()}
             />
           </div>
 

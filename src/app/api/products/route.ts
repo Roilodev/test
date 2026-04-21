@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   if (!session) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
 
   const body = await req.json();
-  const { name, slug, description, price, imageUrl, category, stock, featured } = body;
+  const { name, slug, description, price, imageUrl, images, videos, category, stock, featured } = body;
 
   if (!name || !slug || !description || !imageUrl || !category) {
     return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
@@ -26,6 +26,8 @@ export async function POST(req: Request) {
         description,
         price: parseFloat(price),
         imageUrl,
+        images: images ?? JSON.stringify([imageUrl]),
+        videos: videos ?? "[]",
         category,
         stock: parseInt(stock) || 0,
         featured: Boolean(featured),
