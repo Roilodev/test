@@ -31,6 +31,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
+RUN mkdir -p /app/public/uploads && chown nextjs:nodejs /app/public/uploads
+
 # Native addon (not bundled by webpack)
 COPY --from=builder /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 

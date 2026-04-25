@@ -8,12 +8,20 @@ services:
       ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY}"
       UPLOAD_POST_API_KEY: "${UPLOAD_POST_API_KEY}"
       AUTH_SECRET: "${AUTH_SECRET}"
-      NEXTAUTH_URL: "${NEXTAUTH_URL:-http://localhost:3000}"
+      NEXTAUTH_URL: "${NEXTAUTH_URL}"
       ADMIN_EMAIL: "${ADMIN_EMAIL}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD}"
     volumes:
       - db_data:/data
+      - uploads_data:/app/public/uploads
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
   db_data:
+  uploads_data:
